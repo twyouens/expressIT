@@ -1,4 +1,5 @@
 const express = require('express')
+const Asset = require('../models/assetsModel')
 const router = express.Router()
 
 router.use((req, res, next) => {
@@ -20,6 +21,15 @@ router.get('/', (req, res) => {
             }  
         ]
     )
+})
+router.post('/', async (req, res) => {
+    try{
+        newAsset = await Asset.create(req.body)
+        res.status(201).send(newAsset);
+    } catch(error){
+        console.error(error)
+        res.status(500).send({error:error.message})
+    }
 })
 router.get('/asset/:id', (req, res) => {
     const { id } = req.params;
