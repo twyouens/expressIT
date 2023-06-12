@@ -1,4 +1,5 @@
-const app  = require("express")();
+const express = require("express");
+const app = express();
 require('dotenv').config()
 const port = 8080;
 const { default: mongoose } = require("mongoose");
@@ -19,5 +20,6 @@ app.get("/", (req, res) => {
 });
 
 app.use('/assets',assets)
+app.use(express.json)
 connect()
 app.listen(process.env.APP_PORT, ()=>{console.log(`Server started! vist: http://localhost:${port}`)});
