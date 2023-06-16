@@ -5,6 +5,9 @@ const port = 8080;
 const { default: mongoose } = require("mongoose");
 const assets = require('./src/routes/assets')
 
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 async function connect() {
     try{
         await mongoose.connect(process.env.DB_URI)
@@ -19,7 +22,6 @@ app.get("/", (req, res) => {
     res.status(404).send("Invalid URL")
 });
 
-app.use('/assets',assets)
-app.use(express.json)
+app.use('/assets', assets)
 connect()
 app.listen(process.env.APP_PORT, ()=>{console.log(`Server started! vist: http://localhost:${port}`)});
