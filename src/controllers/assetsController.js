@@ -50,9 +50,24 @@ async function update(req, res, next) {
     
 }
 
+async function remove(req, res, next) {
+    const { id } = req.params;
+    try{
+        const asset = await Asset.findByIdAndDelete(id);
+        if(!asset){
+            return res.status(404).send({error:"not-found",errorMessage:error.message});
+        }
+        res.status(202).send({state: "success"});
+    } catch (error){
+        console.error("Error when trying to update asset",error.message)
+        next(error)
+    }
+}
+
 module.exports = {
     get,
     getbyID,
     create,
-    update
+    update,
+    remove
 };
