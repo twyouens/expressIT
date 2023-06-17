@@ -13,8 +13,11 @@ async function get(req, res, next) {
 async function getbyID(req, res, next) {
     const { id } = req.params;
     try{
-        const assets = await Asset.findById(id);
-        res.status(200).send(assets)
+        const asset = await Asset.findById(id);
+        if(!asset){
+
+        }
+        res.status(200).send(asset)
     } catch (error){
         console.error("Error when trying to query assets",error.message)
         next(error)
@@ -31,8 +34,25 @@ async function create(req, res, next) {
     }
 }
 
+async function update(req, res, next) {
+    const { id } = req.params;
+    try{
+        const asset = await Asset.findByIdAndUpdate(id, req.body);
+        if(!asset){
+            return res.status(404).send({error:"not-found",errorMessage:error.message});
+        }
+        const updatedAsset = await Asset.findById(id);
+        res.status(202).send(updatedAsset);
+    } catch (error){
+        console.error("Error when trying to update asset",error.message)
+        next(error)
+    }
+    
+}
+
 module.exports = {
     get,
     getbyID,
     create,
+    update
 };
