@@ -1,5 +1,4 @@
 const express = require('express')
-const Asset = require('../models/assetsModel')
 const router = express.Router()
 const assetsController = require('../controllers/assetsController')
 
@@ -15,5 +14,8 @@ router.get('/asset/:id', assetsController.getbyID)
 
 // POST new asset
 router.post('/', assetsController.create)
+
+// PUT update asset
+router.put('/asset/:id', assetsController.update)
 
 module.exports = router
