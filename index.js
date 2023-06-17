@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 require('dotenv').config()
-const port = 8080;
 const { default: mongoose } = require("mongoose");
 const assets = require('./src/routes/assets')
 
@@ -24,4 +23,4 @@ app.get("/", (req, res) => {
 
 app.use('/assets', assets)
 connect()
-app.listen(process.env.APP_PORT, ()=>{console.log(`Server started! vist: http://localhost:${port}`)});
+app.listen(process.env.APP_PORT, ()=>{console.log(`Server started! vist: http://localhost:${process.env.APP_PORT}`)});
