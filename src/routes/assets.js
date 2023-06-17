@@ -18,4 +18,7 @@ router.post('/', assetsController.create)
 // PUT update asset
 router.put('/asset/:id', assetsController.update)
 
+// DELETE delete asset
+router.delete('/asset/:id', assetsController.remove)
+
 module.exports = router
