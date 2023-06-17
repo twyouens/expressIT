@@ -17,10 +17,6 @@ async function connect() {
     }
 }
 
-app.get("/", (req, res) => {
-    res.status(404).send("Invalid URL")
-});
-
 app.use('/assets', assets)
 connect()
 app.listen(process.env.APP_PORT, ()=>{console.log(`Server started! vist: http://localhost:${process.env.APP_PORT}`)});
